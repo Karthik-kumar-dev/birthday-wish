@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Happy Birthday Harshitha! 🎂 Doraemon Surprise</title>
+  <meta name="description"
+    content="A special Doraemon-themed birthday wish website for Harshitha with interactive Anywhere Door, cake blowing, cake cutting, and wishes.">
+  <meta name="theme-color" content="#0096E0">
+
+  <!-- Google Fonts: Fredoka & Baloo 2 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Bangers&family=Fredoka:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Canvas Confetti Overlay -->
+  <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- Fullscreen Portal Camera Warp Overlay -->
+  <div id="portalWarpOverlay" class="portal-warp-overlay" aria-hidden="true">
+    <div class="warp-rings"></div>
+  </div>
+
+  <!-- Ambient Sky Background Elements -->
+  <div class="sky-background" aria-hidden="true">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
+
+    <div class="star star-1">★</div>
+    <div class="star star-2">✦</div>
+    <div class="star star-3">★</div>
+    <div class="star star-4">✦</div>
+    <div class="star star-5">★</div>
+    <div class="star star-6">✦</div>
+
+    <div class="balloon balloon-1">🎈</div>
+    <div class="balloon balloon-2">🎈</div>
+    <div class="balloon balloon-3">🎈</div>
+    <div class="balloon balloon-4">🎈</div>
+  </div>
+
+  <!-- Persistent Floating Music / Sound Toggle -->
+  <div class="audio-control-container">
+    <button id="muteBtn" class="mute-btn" aria-label="Toggle background music" title="Mute or Unmute Music">
+      <svg class="bell-icon" viewBox="0 0 40 40" aria-hidden="true">
+        <!-- Doraemon Bell -->
+        <circle cx="20" cy="22" r="14" fill="#FFD800" stroke="#222" stroke-width="2" />
+        <line x1="6" y1="20" x2="34" y2="20" stroke="#222" stroke-width="2" />
+        <line x1="6" y1="23" x2="34" y2="23" stroke="#222" stroke-width="2" />
+        <circle cx="20" cy="27" r="3.5" fill="#222" />
+        <line x1="20" y1="30.5" x2="20" y2="36" stroke="#222" stroke-width="2.5" />
+        <ellipse cx="20" cy="7" rx="5" ry="3" fill="#E70012" stroke="#222" stroke-width="1.5" />
+      </svg>
+      <span id="soundWave" class="sound-waves">
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+        <span class="bar bar-3"></span>
+      </span>
+      <span class="mute-text" id="muteLabel">Music</span>
+    </button>
+  </div>
+
+  <!-- Background Music Audio Element -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/doraemon-telugu.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Wrong Password Sound Effect -->
+  <audio id="wrongPasswordSound" preload="auto">
+    <source src="assets/original-fah.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Main Viewport Container -->
+  <main class="app-container">
+
+    <!-- ==============================================
+         SCREEN 1: WELCOME SCREEN (ANYWHERE DOOR)
+         ============================================== -->
+    <section id="screen-welcome" class="screen active" aria-labelledby="welcome-title">
+      <div class="screen-content welcome-card">
+        
+        <!-- Welcome Top: Header & Text -->
+        <div class="welcome-top">
+          <!-- Rotating Bamboo Copter (Take-copter) Header -->
+          <div class="copter-wrapper" aria-hidden="true">
+            <div class="propeller"></div>
+            <div class="propeller-shaft"></div>
+            <div class="propeller-base"></div>
+          </div>
+
+          <h1 id="welcome-title" class="welcome-heading">
+            Hey <span class="highlight-name" id="namePlaceholder">Harshitha</span>,<br>
+            a surprise is waiting for you!
+          </h1>
+          <p class="welcome-subtext">Enter the secret key to unlock Doraemon's Anywhere Door ✨</p>
+        </div>
+
+        <!-- Anywhere Door 3D Interactive Model -->
+        <div class="anywhere-door-frame" id="doorContainer" style="display:none;">
+          <div class="door-outer-casing">
+            <div class="door-panel" id="doorLeaf">
+              <div class="door-inner-molding"></div>
+              <div class="door-knob"></div>
+            </div>
+            <div class="door-portal-light">
+              <div class="portal-tunnel"></div>
+              <div class="portal-core-glow"></div>
+              <span class="portal-sparkle">✨</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Welcome Bottom: Password Gate & Button & Mascot -->
+        <div class="welcome-bottom">
+          <div id="doorLock" class="door-lock">
+            <p class="lock-title">🔐 Secret Access</p>
+            <p class="lock-subtext">Enter the birthday key</p>
+            <input id="doorPassword" class="lock-input" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Enter password" aria-label="Door password">
+            <button id="unlockDoorBtn" class="btn btn-secondary lock-btn">Unlock</button>
+            <p id="lockError" class="lock-error" aria-live="polite"></p>
+          </div>
+
+          <button id="openDoorBtn" class="btn btn-primary btn-large btn-door" aria-label="Open Doraemon's Anywhere Door" style="display:none;">
+            <span class="btn-text">Open the Door 🚪✨</span>
+          </button>
+
+          <!-- Doraemon Hero Character Illustration -->
+          <div class="doraemon-hero-wrapper" aria-label="Doraemon Celebrating Birthday">
+            <img src="assets/doraemon.png" alt="Doraemon Celebrating" class="doraemon-hero-img">
+            <span class="doraemon-tagline">Welcome to the celebration! 🎉</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCREEN 2: CAKE SCREEN (5 CANDLES, STRICTLY NO AGE)
+         ============================================== -->
+    <section id="screen-cake" class="screen" aria-labelledby="cake-title">
+      <div class="screen-content">
+        <h2 id="cake-title" class="screen-title">Make a Secret Wish! 🎂</h2>
+        <p class="instruction-text" id="blowInstruction">
+          Tap the candles or press the button below to blow them out! 🎂✨
+        </p>
+
+        <!-- Cake & Doraemon Stage -->
+        <div class="cake-stage-wrapper">
+          <!-- Doraemon Cheering Mascot Beside Cake -->
+          <div class="cake-dora-cheer" aria-hidden="true">
+            <img src="assets/doraemon.png" alt="Doraemon Cheering" class="cake-dora-img">
+            <span class="dora-speech-bubble">Blow them out, Harshitha! ✨</span>
+          </div>
+
+          <!-- 2-Tier Realistic 3D Birthday Cake with 5 Planted Candles -->
+          <div class="cake-stage" id="cakeStage">
+            <div class="cake-container">
+              
+              <!-- Top Tier: 3D Cream Top with Planted Candles, Strawberries and Drips -->
+              <div class="cake-tier tier-top">
+                
+                <!-- 5 Candles Firmly Planted on the Top Surface -->
+                <div class="candles-rack" id="candlesRack">
+                  <!-- Candle 1 -->
+                  <div class="candle candle-1" data-candle="0" tabindex="0" role="button"
+                    aria-label="Candle 1, click or tap to blow out">
+                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="smoke"></div>
+                    <div class="wick"></div>
+                    <div class="candle-stick stripe-blue"></div>
+                    <div class="cream-dollop"></div>
+                  </div>
+                  <!-- Candle 2 -->
+                  <div class="candle candle-2" data-candle="1" tabindex="0" role="button"
+                    aria-label="Candle 2, click or tap to blow out">
+                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="smoke"></div>
+                    <div class="wick"></div>
+                    <div class="candle-stick stripe-red"></div>
+                    <div class="cream-dollop"></div>
+                  </div>
+                  <!-- Candle 3 (Center) -->
+                  <div class="candle candle-3" data-candle="2" tabindex="0" role="button"
+                    aria-label="Candle 3, click or tap to blow out">
+                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="smoke"></div>
+                    <div class="wick"></div>
+                    <div class="candle-stick stripe-yellow"></div>
+                    <div class="cream-dollop"></div>
+                  </div>
+                  <!-- Candle 4 -->
+                  <div class="candle candle-4" data-candle="3" tabindex="0" role="button"
+                    aria-label="Candle 4, click or tap to blow out">
+                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="smoke"></div>
+                    <div class="wick"></div>
+                    <div class="candle-stick stripe-blue"></div>
+                    <div class="cream-dollop"></div>
+                  </div>
+                  <!-- Candle 5 -->
+                  <div class="candle candle-5" data-candle="4" tabindex="0" role="button"
+                    aria-label="Candle 5, click or tap to blow out">
+                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="smoke"></div>
+                    <div class="wick"></div>
+                    <div class="candle-stick stripe-red"></div>
+                    <div class="cream-dollop"></div>
+                  </div>
+                </div>
+
+                <div class="tier-top-surface">
+                  <div class="top-decorations">
+                    <span>🍓</span><span>⭐</span><span>🍓</span><span>⭐</span><span>🍓</span>
+                  </div>
+                </div>
+                <div class="frosting-drips">
+                  <span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="cream-pearls">
+                  <i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+
+              <!-- Middle Cream Filling Layer -->
+              <div class="cake-cream-band"></div>
+
+              <!-- Bottom Tier: Doraemon Collar, Bell, and 4D Pocket -->
+              <div class="cake-tier tier-bottom">
+                <div class="bottom-tier-decor">
+                  <div class="cake-red-collar">
+                    <div class="cake-gold-bell">
+                      <span class="bell-slot"></span>
+                    </div>
+                  </div>
+                  <div class="cake-pocket"></div>
+                </div>
+                <div class="frosting-drips large">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="base-cream-rosettes">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+
+              <!-- Gold Platter and Pedestal Base -->
+              <div class="cake-plate"></div>
+              <div class="cake-stand"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="controls-group">
+          <button id="blowBtn" class="btn btn-primary btn-large" aria-label="Blow the candles">
+            Blow the candles 🎂💨
+          </button>
+        </div>
+
+        <!-- Make a wish confirmation banner -->
+        <div id="wishBanner" class="wish-banner" aria-live="polite">
+          <p>✨ Make a wish and keep it in your heart... ✨</p>
+          <button id="goToCutBtn" class="btn btn-secondary">Cut the Cake 🍰 ➔</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCREEN 3: CAKE CUTTING SCREEN
+         ============================================== -->
+    <section id="screen-cut" class="screen" aria-labelledby="cut-title">
+      <div class="screen-content">
+        <h2 id="cut-title" class="screen-title">Time to Cut the Cake! 🍰</h2>
+        <p class="instruction-text" id="cutInstruction">Tap the cake or guide the knife downward to take the first
+          slice!</p>
+
+        <div class="cutting-stage" id="cuttingStage">
+          <!-- Animated Doraemon-themed Knife -->
+          <div class="interactive-knife" id="cakeKnife" role="button" tabindex="0"
+            aria-label="Interactive Knife, tap to slice cake">
+            <div class="knife-blade">
+              <div class="blade-edge"></div>
+              <div class="blade-sparkle">✦</div>
+            </div>
+            <div class="knife-bolster"></div>
+            <div class="knife-handle">
+              <span class="knife-bell-badge"></span>
+            </div>
+          </div>
+
+          <!-- Cutting Cake Container -->
+          <div class="cut-cake-body" id="cutCakeBody" role="button" tabindex="0"
+            aria-label="Birthday cake, click to slice">
+            <div class="cut-line" id="cutLine"></div>
+
+            <!-- Whole Cake -->
+            <div class="cake-whole" id="cakeWhole">
+              <div class="tier-frosting"></div>
+              <div class="cake-body-layers"></div>
+              <div class="cake-decorations">
+                <span class="dorayaki-icon" title="Dorayaki">🥞</span>
+                <span class="sugar-heart" title="Love">💖</span>
+                <span class="sugar-star" title="Magic">⭐</span>
+              </div>
+            </div>
+
+            <!-- Slide-out Slice -->
+            <div class="cake-slice-piece" id="cakeSlicePiece">
+              <div class="slice-inner-sponge"></div>
+              <div class="slice-topping">🍓</div>
+            </div>
+
+            <!-- Falling Crumbs -->
+            <div class="cake-crumbs" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+
+            <!-- Serving Plate -->
+            <div class="serving-plate" id="servingPlate">
+              <span class="plate-text">Harshitha's Slice ✨</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Celebration Banner (pops up upon cutting) -->
+        <div class="celebration-headline" id="celebrationHeadline">
+          <div class="celebration-dora-avatar">
+            <img src="assets/doraemon.png" alt="Doraemon Cheering" class="dora-celebrate-img">
+          </div>
+          <h2 class="birthday-text pop-in" id="bdayHeadingText">Happy Birthday Harshitha! 🎉</h2>
+          <p class="cheer-subtext">May all your dreams take flight like a Bamboo-Copter!</p>
+          <button id="goToShinchanBtn" class="btn btn-primary btn-large">
+            Meet Shinchan also 🎒
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCREEN 4: SHINCHAN INTRO
+         ============================================== -->
+    <section id="screen-shinchan" class="screen" aria-labelledby="shinchan-title">
+      <div class="screen-content shinchan-card">
+        <span class="shinchan-sunburst" aria-hidden="true"></span>
+        <p class="shinchan-kicker">Action Kamen Alert!</p>
+        <h2 id="shinchan-title" class="shinchan-title">A Wild Shinchan Appears!</h2>
+
+        <div class="shinchan-stage">
+          <img src="assets/shinchan.png" alt="Shinchan" class="shinchan-img">
+          <div class="shinchan-speech" role="note">
+            <span>Doremon a ravala enti, nanu kudha invite chey</span>
+          </div>
+        </div>
+
+        <button id="startMemoriesBtn" class="btn shinchan-btn btn-large">
+          See Our Memories 📸
+        </button>
+        <p class="shinchan-hint">Buri-buri! Shinchan has something to say about every photo.</p>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCREEN 5: SHINCHAN'S MEMORY LANE
+         ============================================== -->
+    <section id="screen-memories" class="screen" aria-labelledby="memories-title">
+      <div class="screen-content memories-card">
+        <span class="memories-kicker">Memory Lane</span>
+        <h2 id="memories-title" class="memories-title">Shinchan's Photo Album</h2>
+
+        <div class="memory-stage">
+          <div class="memory-photo-frame" id="memoryPhotoFrame">
+            <img id="memoryPhoto" class="memory-photo" src="images/memory-1.png" alt="Memory 1">
+            <span class="memory-count" id="memoryCount">1 / 6</span>
+          </div>
+
+          <div class="memory-shinchan">
+            <img src="assets/shinchan.png" alt="Shinchan" class="memory-shinchan-img">
+            <div class="memory-speech" id="memorySpeech" role="status" aria-live="polite">
+              <span id="memoryComment">Ahh! Ee photo lo navvu chusi naa heart melt ayindi! 💛</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-dots" id="memoryDots" aria-hidden="true"></div>
+
+        <div class="memory-actions">
+          <button id="memoryPrevBtn" class="btn memory-nav-btn" aria-label="Previous memory" disabled>← Prev</button>
+          <button id="memoryNextBtn" class="btn memory-nav-btn">Next memory ➜</button>
+        </div>
+
+        <div class="memory-reveal" id="memoryReveal">
+          <button id="revealCardBtn" class="btn btn-secondary btn-large" disabled>
+            Read your birthday card 💌
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCREEN 6: PERSONAL WISH SCREEN
+         ============================================== -->
+    <section id="screen-wish" class="screen" aria-labelledby="card-title">
+      <div class="screen-content wish-layout">
+
+        <!-- Doraemon Envelope & Letter -->
+        <article class="letter-envelope" aria-live="polite">
+          <header class="letter-header">
+            <div class="letter-dora-stamp">
+              <img src="assets/doraemon.png" alt="Doraemon Stamp" class="dora-stamp-img">
+            </div>
+            <div class="bell-seal" aria-hidden="true">
+              <div class="mini-bell-seal"></div>
+            </div>
+            <h2 id="card-title" class="letter-to">To Dear <span class="card-name-target">Harshitha</span> 🌸</h2>
+          </header>
+
+          <div class="letter-body">
+            <p id="typedMessage" class="typed-text"></p>
+            <span class="cursor-caret" id="cursorCaret">|</span>
+          </div>
+
+          <footer class="letter-footer">
+            <!-- Hand-drawn SVG Dorayaki treat -->
+            <div class="dorayaki-treat" title="Dorayaki for Harshitha!">
+              <svg viewBox="0 0 50 35" width="46" height="32" aria-hidden="true">
+                <ellipse cx="25" cy="18" rx="22" ry="12" fill="#8B4513" />
+                <ellipse cx="25" cy="16" rx="23" ry="11" fill="#C67D32" />
+                <ellipse cx="25" cy="14" rx="20" ry="8" fill="#E29B4A" />
+                <ellipse cx="25" cy="15" rx="14" ry="4" fill="#3D1C06" />
+              </svg>
+            </div>
+            <p class="sign-off">Forever cheering for you,<br><strong>Your Best Friend</strong></p>
+          </footer>
+        </article>
+
+        <!-- Final Action Bar -->
+        <div class="wish-actions">
+          <button id="replayBtn" class="btn btn-secondary btn-large" aria-label="Replay Birthday Experience">
+            Replay Experience 🔄
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Preload Shinchan/memory assets -->
+  <link rel="preload" as="image" href="assets/shinchan.png">
+  <link rel="preload" as="image" href="images/memory-1.png">
+  <link rel="preload" as="image" href="images/memory-2.png">
+  <link rel="preload" as="image" href="images/memory-3.png">
+  <link rel="preload" as="image" href="images/memory-4.png">
+  <link rel="preload" as="image" href="images/memory-5.png">
+  <link rel="preload" as="image" href="images/memory-6.png">
+
+  <script src="script.js"></script>
+</body>
+
+</html>
