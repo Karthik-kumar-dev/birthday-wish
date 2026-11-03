@@ -49,7 +49,7 @@
   </div>
 
   <!-- Persistent Floating Music / Sound Toggle -->
-  <div class="audio-control-container">
+  <div class="audio-control-container" id="audioControls" style="display:none;">
     <button id="muteBtn" class="mute-btn" aria-label="Toggle background music" title="Mute or Unmute Music">
       <svg class="bell-icon" viewBox="0 0 40 40" aria-hidden="true">
         <!-- Doraemon Bell -->
@@ -87,7 +87,7 @@
          ============================================== -->
     <section id="screen-welcome" class="screen active" aria-labelledby="welcome-title">
       <div class="screen-content welcome-card">
-        
+
         <!-- Welcome Top: Header & Text -->
         <div class="welcome-top">
           <!-- Rotating Bamboo Copter (Take-copter) Header -->
@@ -124,12 +124,14 @@
           <div id="doorLock" class="door-lock">
             <p class="lock-title">🔐 Secret Access</p>
             <p class="lock-subtext">Enter the birthday key</p>
-            <input id="doorPassword" class="lock-input" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Enter password" aria-label="Door password">
+            <input id="doorPassword" class="lock-input" type="text" inputmode="text" autocomplete="off"
+              autocapitalize="off" spellcheck="false" placeholder="Enter password" aria-label="Door password">
             <button id="unlockDoorBtn" class="btn btn-secondary lock-btn">Unlock</button>
             <p id="lockError" class="lock-error" aria-live="polite"></p>
           </div>
 
-          <button id="openDoorBtn" class="btn btn-primary btn-large btn-door" aria-label="Open Doraemon's Anywhere Door" style="display:none;">
+          <button id="openDoorBtn" class="btn btn-primary btn-large btn-door" aria-label="Open Doraemon's Anywhere Door"
+            style="display:none;">
             <span class="btn-text">Open the Door 🚪✨</span>
           </button>
 
@@ -164,16 +166,18 @@
           <!-- 2-Tier Realistic 3D Birthday Cake with 5 Planted Candles -->
           <div class="cake-stage" id="cakeStage">
             <div class="cake-container">
-              
+
               <!-- Top Tier: 3D Cream Top with Planted Candles, Strawberries and Drips -->
               <div class="cake-tier tier-top">
-                
+
                 <!-- 5 Candles Firmly Planted on the Top Surface -->
                 <div class="candles-rack" id="candlesRack">
                   <!-- Candle 1 -->
                   <div class="candle candle-1" data-candle="0" tabindex="0" role="button"
                     aria-label="Candle 1, click or tap to blow out">
-                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="flame">
+                      <div class="flame-inner"></div>
+                    </div>
                     <div class="smoke"></div>
                     <div class="wick"></div>
                     <div class="candle-stick stripe-blue"></div>
@@ -182,7 +186,9 @@
                   <!-- Candle 2 -->
                   <div class="candle candle-2" data-candle="1" tabindex="0" role="button"
                     aria-label="Candle 2, click or tap to blow out">
-                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="flame">
+                      <div class="flame-inner"></div>
+                    </div>
                     <div class="smoke"></div>
                     <div class="wick"></div>
                     <div class="candle-stick stripe-red"></div>
@@ -191,7 +197,9 @@
                   <!-- Candle 3 (Center) -->
                   <div class="candle candle-3" data-candle="2" tabindex="0" role="button"
                     aria-label="Candle 3, click or tap to blow out">
-                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="flame">
+                      <div class="flame-inner"></div>
+                    </div>
                     <div class="smoke"></div>
                     <div class="wick"></div>
                     <div class="candle-stick stripe-yellow"></div>
@@ -200,7 +208,9 @@
                   <!-- Candle 4 -->
                   <div class="candle candle-4" data-candle="3" tabindex="0" role="button"
                     aria-label="Candle 4, click or tap to blow out">
-                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="flame">
+                      <div class="flame-inner"></div>
+                    </div>
                     <div class="smoke"></div>
                     <div class="wick"></div>
                     <div class="candle-stick stripe-blue"></div>
@@ -209,7 +219,9 @@
                   <!-- Candle 5 -->
                   <div class="candle candle-5" data-candle="4" tabindex="0" role="button"
                     aria-label="Candle 5, click or tap to blow out">
-                    <div class="flame"><div class="flame-inner"></div></div>
+                    <div class="flame">
+                      <div class="flame-inner"></div>
+                    </div>
                     <div class="smoke"></div>
                     <div class="wick"></div>
                     <div class="candle-stick stripe-red"></div>
@@ -386,7 +398,7 @@
           <div class="memory-shinchan">
             <img src="assets/shinchan.png" alt="Shinchan" class="memory-shinchan-img">
             <div class="memory-speech" id="memorySpeech" role="status" aria-live="polite">
-              <span id="memoryComment">Ahh! Ee photo lo navvu chusi naa heart melt ayindi! 💛</span>
+              <span id="memoryComment">Ee photo lo navvu chala bagundi! Super smile! 😄</span>
             </div>
           </div>
         </div>

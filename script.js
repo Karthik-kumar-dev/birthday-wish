@@ -10,7 +10,18 @@ const CONFIG = {
   recipientName: "Harshitha",
   welcomeText: "Hey Harshitha, a surprise is waiting for you!",
   birthdayHeading: "Happy Birthday Harshitha! 🎉",
-  personalMessage: `Dear Harshitha,\n\nWishing you a magical birthday filled with all the joy, wonder, and surprises of Doraemon's 4D pocket!\n\nMay this year open doors to incredible new adventures, boundless happiness, peace, good health, and all your biggest dreams coming true.\n\nThank you for bringing so much brightness, warmth, and fun into every moment. Never stop smiling, because your smile lights up the world! 🌟🎂✨`,
+  personalMessage: `Dear Harshitha,\n\nHoiiiii vaashik bestie 🤝 , Many More  Return of The Dayyyyy🎂🍰🍫🍬🍭🍼🥳,  
+Note: Eee oka msg loneee , sai bday reply and Neku  maaaaa andari wishes cheptunam 😁.
+ Ipati varakuu makuu nuv ichinantha priority and attention ipati varaki evaru ivaleduu 🥺 .  And nuv Antav gaa maku long messages pedite nachadu anni but  mak alla m kadu , nuv ukee ukke alla pratidaniki intha intha pedha msglu peditenee alla anam anthee 🙂. Mak ipatiki ardham avani muchata enti anteee asalu nduku mem ante anthaaa ekuva nekuu like maaloo nachinaa vishayam entiii ani ? 🤔 . And nuv 3rd person vi m kaduu u always 1 of us ☺️. Mem kuda eee time ki Hyd lo unteee pakka nii dagarikee vachevallamuuu and nii thone time spend chesevallamuu ☹️ but aa chance led gaa ipudu , future lo ite pakka chestamm. Eee Vashik bestie maa tho epatiki undali annii manaspoorthy gaaaaa koorukutu 😌.  Once again Happy Happy Birthdayyyy 🕺🕺🥳🎉 To youuuuu uu uu uu uu uu uu  Harshithaaaaaaaaa aaa aa aa aa aa 😯😯😯😯😯 🫶 ❤️. 
+
+Note from Kar man : Tondagara oka lover ni set cheskooo street kukalani 🐕 kothadaniki panikiostadu🤣🤣🤣
+
+From Soii 😎 :  Happy Birthday Thivari Naga Shiva Harshithaawwwwwwwwwwwwwww 🍭🍫🎂🍰Nuv pratidaniki Sorry luu chepuduu appudu 🙏 , enni sorry luu chepinavoo list undi ani Chepina gaa , epudu ana HYD vachinapudu avvi anni bayatiki tisteee , nuv malla edustavv 😒 anduke mundee cheptuna Beeee care fulllll 😤🫵chuskoww malla asalkee bakkaaa piece vi 😅😅 .  Nuv mak entha connect iyenavoo moonnaaa meeting lo ardham iyendi nakuu , nen just nidagariki vaste ella unatav ani adigina anthee , nii eyes lo direct water a vachinay 🥹 adi okati challuu mem nek entha important anni .  
+
+From Akhil :  Many More Happy returns of the Harshithaaa..🍭🍫🎂 At 1st nuvvu text chesinappudu Edo random ga chesav anukunna but after few days friends avvadam koncham variety ga undhi but feeling good 😊 But intha close aytham ani expect cheyaledu . Whatever it may stay happy Happy Birthday 🎂.
+
+From vamshi : Happy Birthday 🎂 to My Co Director, co worker, manam chala njoy chesam vallatho polchukunte manam movies chudadam meeting lo works complete cheyadam.Ni valla na introvert nature improve ayinndi .But Harshitha Many more happy returns of the day 🎂🎂
+Nindu nurellu Sallaga bathuku .. From  Vashik Technologies..♥️🫶 (Company name lo oka part la untavu,ala ne life long kuda untav mathone no worries ♥️🫶)..`,
   musicVolume: 0.4,
   audioPath: "assets/doraemon-telugu.mp3",
   doorPassword: "har she tha 04.11.2005",
@@ -20,12 +31,12 @@ const CONFIG = {
     {
       src: "images/memory-1.png",
       alt: "Memory 1",
-      comment: "Ahh! Ee photo lo navvu chusi naa heart melt ayindi! 💛"
+      comment: "Ee photo lo navvu chala bagundi! Super smile! 😄"
     },
     {
       src: "images/memory-2.png",
       alt: "Memory 2",
-      comment: "Nuvvu eppudu ila cute ga undali... sambandham ledu! 😆"
+      comment: "Ee photo lo vibe chala energetic ga undi! Keep it up! 😆"
     },
     {
       src: "images/memory-3.png",
@@ -45,7 +56,27 @@ const CONFIG = {
     {
       src: "images/memory-6.png",
       alt: "Memory 6",
-      comment: "Okay okay... ippudu birthday card time! Ready ah? 💌"
+      comment: "Ee photo lo expression chala natural ga undi! Nice one! 😄"
+    },
+    {
+      src: "images/memory-7.png",
+      alt: "Memory 7",
+      comment: "Ee photo lo energy chala bavundi! Full josh! ⚡"
+    },
+    {
+      src: "images/memory-8.png",
+      alt: "Memory 8",
+      comment: "Smile tho ne e roju ni start chey! Chala bagundi! 😊"
+    },
+    {
+      src: "images/memory-9.png",
+      alt: "Memory 9",
+      comment: "Ee moment chala special ga undi! Superb! 🌟"
+    },
+    {
+      src: "images/memory-10.png",
+      alt: "Memory 10",
+      comment: "Photo album ki inko manchi memory add ayindi! Cheers! 🎉"
     }
   ],
   memorySeconds: 5
@@ -68,6 +99,7 @@ const state = {
 const bgMusic = document.getElementById("bgMusic");
 const wrongPasswordSound = document.getElementById("wrongPasswordSound");
 const muteBtn = document.getElementById("muteBtn");
+const audioControls = document.getElementById("audioControls");
 const soundWave = document.getElementById("soundWave");
 const muteLabel = document.getElementById("muteLabel");
 const openDoorBtn = document.getElementById("openDoorBtn");
@@ -327,6 +359,8 @@ function unlockDoor() {
   openDoorBtn.style.display = "inline-flex";
   openDoorBtn.classList.add("unlock-pop");
 
+  if (audioControls) audioControls.style.display = "block";
+
   // Start the Doraemon Telugu theme on the unlock user gesture
   initMusic();
   getAudioContext();
@@ -352,6 +386,9 @@ openDoorBtn.addEventListener("click", () => {
   openDoorBtn.disabled = true;
   openDoorBtn.style.pointerEvents = "none";
 
+  // Ensure background music starts/resumes here too. On replay the password
+  // step is skipped, so this is the user gesture that (re)starts the music.
+  initMusic();
   getAudioContext();
   playSynthesizedSound("door");
 

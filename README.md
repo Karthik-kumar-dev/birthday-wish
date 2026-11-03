@@ -94,12 +94,16 @@ const CONFIG = {
   audioPath: "assets/doraemon-telugu.mp3",
   doorPassword: "har she tha 04.11.2005",
   memoryPhotos: [
-    { src: "images/memory-1.png", alt: "Memory 1", comment: "Ahh! Ee photo lo navvu chusi naa heart melt ayindi! 💛" },
-    { src: "images/memory-2.png", alt: "Memory 2", comment: "Nuvvu eppudu ila cute ga undali... sambandham ledu! 😆" },
+    { src: "images/memory-1.png", alt: "Memory 1", comment: "Ee photo lo navvu chala bagundi! Super smile! 😄" },
+    { src: "images/memory-2.png", alt: "Memory 2", comment: "Ee photo lo vibe chala energetic ga undi! Keep it up! 😆" },
     { src: "images/memory-3.png", alt: "Memory 3", comment: "Doremon a ravala enti? Ee photo lo nuvve superstar! 🌟" },
     { src: "images/memory-4.png", alt: "Memory 4", comment: "Ee memory ki naa taraphu nunchi 100 marks! Buri buri! 📸" },
     { src: "images/memory-5.png", alt: "Memory 5", comment: "Action Kamen kuda ee smile mundu fail ayipoyadu! 😎" },
-    { src: "images/memory-6.png", alt: "Memory 6", comment: "Okay okay... ippudu birthday card time! Ready ah? 💌" }
+    { src: "images/memory-6.png", alt: "Memory 6", comment: "Ee photo lo expression chala natural ga undi! Nice one! 😄" },
+    { src: "images/memory-7.png", alt: "Memory 7", comment: "Ee photo lo energy chala bavundi! Full josh! ⚡" },
+    { src: "images/memory-8.png", alt: "Memory 8", comment: "Smile tho ne e roju ni start chey! Chala bagundi! 😊" },
+    { src: "images/memory-9.png", alt: "Memory 9", comment: "Ee moment chala special ga undi! Superb! 🌟" },
+    { src: "images/memory-10.png", alt: "Memory 10", comment: "Photo album ki inko manchi memory add ayindi! Cheers! 🎉" }
   ],
   memorySeconds: 5,
   typingSpeedMs: 36
