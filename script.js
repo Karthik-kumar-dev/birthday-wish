@@ -10,7 +10,7 @@ const CONFIG = {
   recipientName: "Harshitha",
   welcomeText: "Hey Harshitha, a surprise is waiting for you!",
   birthdayHeading: "Happy Birthday Harshitha! 🎉",
-  personalMessage: `Dear Harshitha,\n\nHoiiiii vaashik bestie 🤝 , Many More  Return of The Dayyyyy🎂🍰🍫🍬🍭🍼🥳,  
+  personalMessage: `Hoiiiii vaashik bestie 🤝,\n\n , Many More  Return of The Dayyyyy🎂🍰🍫🍬🍭🍼🥳,  
 Note: Eee oka msg loneee , sai bday reply and Neku  maaaaa andari wishes cheptunam 😁.
  Ipati varakuu makuu nuv ichinantha priority and attention ipati varaki evaru ivaleduu 🥺 .  And nuv Antav gaa maku long messages pedite nachadu anni but  mak alla m kadu , nuv ukee ukke alla pratidaniki intha intha pedha msglu peditenee alla anam anthee 🙂. Mak ipatiki ardham avani muchata enti anteee asalu nduku mem ante anthaaa ekuva nekuu like maaloo nachinaa vishayam entiii ani ? 🤔 . And nuv 3rd person vi m kaduu u always 1 of us ☺️. Mem kuda eee time ki Hyd lo unteee pakka nii dagarikee vachevallamuuu and nii thone time spend chesevallamuu ☹️ but aa chance led gaa ipudu , future lo ite pakka chestamm. Eee Vashik bestie maa tho epatiki undali annii manaspoorthy gaaaaa koorukutu 😌.  Once again Happy Happy Birthdayyyy 🕺🕺🥳🎉 To youuuuu uu uu uu uu uu uu  Harshithaaaaaaaaa aaa aa aa aa aa 😯😯😯😯😯 🫶 ❤️. 
 
